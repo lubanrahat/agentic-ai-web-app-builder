@@ -1,6 +1,8 @@
-import { Zap } from "lucide-react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export default function Header() {
   return (
@@ -17,7 +19,8 @@ export default function Header() {
         </Link>
 
         <div className="flex items-center gap-5">
-          <Link
+          <Show when="signed-in">
+            <Link
             href={"/projects"}
             className="text-[13px] font-medium text-white/40 transition-colors hover:text-white/80"
           >
@@ -28,6 +31,20 @@ export default function Header() {
             <Zap className="h-3 w-3 fill-white/70" />
             3/30 credits
           </span>
+            <UserButton />
+          </Show>
+
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+               <Button variant={"ghost"} size={"sm"} className={"text-white/40"}>Sign In</Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button variant={"ghost"} size={"sm"} className={"h-8 rounded-full font-semibold active:scale-95 px-4 pt-2"}>
+                 Get Started
+                 <ArrowRight className="h-2 w-3 opacity-60"/>
+              </Button>
+            </SignUpButton>
+          </Show>
         </div>
       </nav>
     </header>

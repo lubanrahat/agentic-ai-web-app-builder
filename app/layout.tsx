@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Forge - AI App Builder",
   description:
-    "Forge is an AI app builder that allows you to create and deploy AI applications with ease. With Forge, you can build AI applications without writing any code. Simply choose your data, select your AI model, and let Forge do the rest. Whether you're a developer looking to quickly prototype an AI application or a business looking to leverage AI for your operations, Forge has you covered.",
+    "Forge is an AI app builder that allows you to create and deploy AI applications with ease. With Forge, you can build AI-powered applications without writing any code. Simply choose your data source, select the AI model you want to use, and let Forge do the rest. Whether you're building a chatbot, a recommendation engine, or a custom AI solution, Forge makes it easy to get started and deploy your application in no time.",
 };
 
 export default function RootLayout({
@@ -30,24 +31,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen flex flex-col",
-          dmSans.variable,
-          lora.variable,
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={cn(
+            "min-h-screen flex flex-col",
+            dmSans.variable,
+            lora.variable,
+          )}
         >
-          <Header/>
-          <main>{children}</main>
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main>{children}</main>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

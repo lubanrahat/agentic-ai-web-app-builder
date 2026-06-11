@@ -3,8 +3,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="pt-40">
-      <Button variant={"destructive"}>Hello world</Button>
-    </div>
+    <main className="min-h-screen bg-[#0a0a0a] selection:bg-white/20">
+      <section className="relative flex flex-col items-center overflow-hidden px-4 pb-24 pt-40 text-center">
+        
+      </section>
+    </main>
   );
 }
