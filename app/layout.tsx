@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
-import { DM_Sans, Lora } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const lora = Lora({
+const sansFont = Plus_Jakarta_Sans({
+  variable: "--font-sans-custom",
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
+  display: "swap",
 });
 
-const dmSans = DM_Sans({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -32,13 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" className={`${sansFont.variable} ${geistMono.variable}`} suppressHydrationWarning>
         <body
-          className={cn(
-            "min-h-screen flex flex-col",
-            dmSans.variable,
-            lora.variable,
-          )}
+          className="antialiased"
+          suppressHydrationWarning
         >
           <ThemeProvider
             attribute="class"
